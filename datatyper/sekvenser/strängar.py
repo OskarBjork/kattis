@@ -19,7 +19,3 @@ def rovar_sprak(
 
 print(backwards("Hej på dig!"))
 print(backwards_string("hello world"))
-
-my_list = [1, 2, 3]
-
-my_list.reverse()
