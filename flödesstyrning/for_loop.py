@@ -53,18 +53,3 @@ def product_ten_digits_prime():
                 return primes[-1], primes[-2]
 
         current_number += 1
-
-
-# print(thousand_prime())
-
-print(product_ten_digits_prime())
-
-# print("Före")
-# for i in range(2, 3):
-#     print(i)
-# # end for
-# print("Efter")
-# print(antal_siffror("dwd2921nd729"))
-
-
-# tal_under_tusen_delbart_med_sju()
