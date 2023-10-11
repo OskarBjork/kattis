@@ -2,6 +2,12 @@ class Djur:
     def __init__(self, namn) -> None:
         self.namn = namn
 
+    def at(self):
+        print("Jag äter")
+
+    def sov(self):
+        print("Jag sover")
+
 
 class Fagel(Djur):
     def __init__(self, namn, vingspann) -> None:
@@ -14,11 +20,17 @@ class Fisk(Djur):
         super().__init__(namn)
         self.maxdjup = maxdjup
 
+    def simma(self):
+        print("Jag simmar")
+
 
 class Haj(Fisk):
     def __init__(self, namn, maxdjup, antal_tänder) -> None:
         super().__init__(namn, maxdjup)
         self.antal_tänder = antal_tänder
+
+    def at(self, djur):
+        print(f"{self.namn} äter {djur.namn}")
 
 
 class Torsk(Fisk):
