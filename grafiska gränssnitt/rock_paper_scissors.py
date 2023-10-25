@@ -1,5 +1,8 @@
 import tkinter as tk
 import random
+from PIL import Image, ImageTk, ImageSequence
+import requests
+from io import BytesIO
 
 
 def click_handler(e):
@@ -17,10 +20,35 @@ def click_handler(e):
 
 
 root = tk.Tk()
+url = "https://media.tenor.com/n14-wyp-7JMAAAAC/epic-amazing.gif"
+response = requests.get(url)
+
+
+image = Image.open(BytesIO(response.content))
+photo = ImageTk.PhotoImage(image)
+label = tk.Label(root, image=photo)
+label.pack()
+
+
 result_label = tk.Label(root)
 result_label.pack()
 computer_label = tk.Label(root)
 computer_label.pack()
+frames = []
+for frame in ImageSequence.Iterator(image):
+    photo = ImageTk.PhotoImage(frame)
+    frames.append(photo)
+
+
+# Define a function to animate the GIF
+def animate_gif(frame):
+    photo = frames[frame]
+    label.config(image=photo)
+    root.after(50, animate_gif, (frame + 1) % len(frames))
+
+
+# Start the animation
+animate_gif(0)
 
 
 def main():
