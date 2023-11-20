@@ -1,3 +1,38 @@
+class Tile:
+    def __init__(self, row, column, char) -> None:
+        self.row = row
+        self.column = column
+        self.char = char
+        self.counted = False
+
+
+def count_tile(tile, map, landmass):
+    if tile is None or tile.char == "." or tile.counted:
+        return landmass
+
+    landmass += 1
+
+    landmass = count_tile()
+
+
+def get_tile(row, column, map):
+    try:
+        return map[row - 1][column - 1]
+    except IndexError:
+        return None
+
+
+def get_adjacent_tiles(tile, map):
+    try:
+        north_tile = get_tile(tile.row - 1, tile.column, map)
+        south_tile = get_tile(tile.row + 1, tile.column, map)
+        west_tile = get_tile(tile.row, tile.column - 1, map)
+        east_tile = get_tile(tile.row, tile.column + 1, map)
+        return (north_tile, south_tile, west_tile, east_tile)
+    except IndexError:
+        return None
+
+
 def calculate_landmass(map):
     for row in map:
         print(row)
