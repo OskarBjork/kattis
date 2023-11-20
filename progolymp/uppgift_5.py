@@ -85,7 +85,7 @@ def find_which_building_to_buy(
                 )
                 + time_until_it_can_be_bought
             )
-            if time_until_mega_pickle_with_new_building + 3 < smallest_time:
+            if time_until_mega_pickle_with_new_building < smallest_time:
                 best_building = building
                 smallest_time = time_until_mega_pickle_with_new_building
         elif available_pickles >= building.price:
