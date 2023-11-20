@@ -5,16 +5,16 @@ def main():
     forbidden_letters = find_forbidden_letters(dna)
     smallest_moves = float("inf")
     for forbidden_letter in forbidden_letters:
-        print("\n")
-        print("Forbidden letter: ", forbidden_letter, "\n")
+        # print("\n")
+        # print("Forbidden letter: ", forbidden_letter, "\n")
         current_moves = 0
         amount_of_hidden_letter = count(dna, forbidden_letter)
         while len(dna) > amount_of_hidden_letter:
-            print("DNA: ", dna)
+            # print("DNA: ", dna)
             smallest_substr, index = find_smallest_substr_with_unique_letters(
                 dna, forbidden_letter, k
             )
-            print("Smallest substr: ", smallest_substr)
+            # print("Smallest substr: ", smallest_substr)
             dna = dna[:index] + dna[index + len(smallest_substr) :]
             current_moves += 1
 
@@ -56,21 +56,26 @@ def find_smallest_substr_with_unique_letters(string, forbidden_letter, max_lengt
                 # print(longest_substr)
                 break
 
-        if len(current_substr) < max_length:
+        if len(current_substr) <= max_length and len(current_substr) > 1:
             substrings.append(current_substr)
-        if list_contains_element_that_is_longer_than_one(substrings):
-            substrings = [x for x in substrings if len(x) > 1]
-    min = float("-inf")
-    min_str = ""
+
+        if len(
+            current_substr
+        ) == 1 and not list_contains_element_that_is_longer_than_one(substrings):
+            substrings.append(current_substr)
+        # if list_contains_element_that_is_longer_than_one(substrings):
+        #     substrings = [x for x in substrings if len(x) > 1]
+    max = float("-inf")
+    max_str = ""
     for substring in substrings:
-        if len(substring) > min:
-            min = len(substring)
-            min_str = substring
+        if len(substring) > max:
+            max = len(substring)
+            max_str = substring
     # print(string, min_str)
-    lowest_index = string.find(min_str)
+    lowest_index = string.find(max_str)
     # highest_index = string.rfind(min_str)
     # print(lowest_index)
-    return min_str, lowest_index
+    return max_str, lowest_index
 
 
 def allowed_to_remove_forbidden_letter(string, forbidden_letter, index):
