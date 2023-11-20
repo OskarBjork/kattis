@@ -3,17 +3,26 @@ def main():
     k = int(input("k ? "))
     original_dna = dna
     forbidden_letters = find_forbidden_letters(dna)
+    smallest_moves = float("inf")
     for forbidden_letter in forbidden_letters:
+        print("\n")
+        print("Forbidden letter: ", forbidden_letter, "\n")
+        current_moves = 0
         amount_of_hidden_letter = count(dna, forbidden_letter)
         while len(dna) > amount_of_hidden_letter:
-            print(forbidden_letter)
+            print("DNA: ", dna)
             smallest_substr, index = find_smallest_substr_with_unique_letters(
                 dna, forbidden_letter, k
             )
-            print(smallest_substr)
+            print("Smallest substr: ", smallest_substr)
             dna = dna[:index] + dna[index + len(smallest_substr) :]
-            print(dna)
+            current_moves += 1
+
+        if current_moves < smallest_moves:
+            smallest_moves = current_moves
         dna = original_dna
+
+    print(smallest_moves)
 
 
 def find_forbidden_letters(string):
@@ -46,12 +55,15 @@ def find_smallest_substr_with_unique_letters(string, forbidden_letter, max_lengt
                 # print(char)
                 # print(longest_substr)
                 break
+
         if len(current_substr) < max_length:
             substrings.append(current_substr)
-    min = float("inf")
+        if list_contains_element_that_is_longer_than_one(substrings):
+            substrings = [x for x in substrings if len(x) > 1]
+    min = float("-inf")
     min_str = ""
     for substring in substrings:
-        if len(substring) < min:
+        if len(substring) > min:
             min = len(substring)
             min_str = substring
     # print(string, min_str)
@@ -59,6 +71,23 @@ def find_smallest_substr_with_unique_letters(string, forbidden_letter, max_lengt
     # highest_index = string.rfind(min_str)
     # print(lowest_index)
     return min_str, lowest_index
+
+
+def allowed_to_remove_forbidden_letter(string, forbidden_letter, index):
+    try:
+        if string[index + 1] != forbidden_letter:
+            return True
+        else:
+            return False
+    except IndexError:
+        return False
+
+
+def list_contains_element_that_is_longer_than_one(list):
+    for i in list:
+        if len(i) > 1:
+            return True
+    return False
 
 
 def count(string, char):
