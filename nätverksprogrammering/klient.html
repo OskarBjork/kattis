@@ -1,0 +1,18 @@
+<html>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    scream = function () {
+      var eventEmitter = io();
+      var msg = $("#msg").val();
+      eventEmitter.emit("scream", msg);
+    };
+    eventEmitter.on("reply", function (data) {
+      alert("Someone screamed: " + data);
+    });
+  </script>
+  <body>
+    <input id="msg" type="text" />
+    <button onclick="scream();">Scream</button>
+  </body>
+</html>
