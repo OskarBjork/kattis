@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Hello World</title>
+  </head>
+  <script>
+    const message = function () {
+      var eventEmitter = io();
+      const input = document.querySelector(".inputField");
+      let msg = input.value;
+      eventEmitter.emit("message", msg);
+    };
+  </script>
+  <body>
+    Hello World
+  </body>
+  <script>
+    var socket = io();
+  </script>
+
+  <input type="text" class="inputField" />
+  <button class="sendBtn" onclick="message()">Send</button>
+</html>
