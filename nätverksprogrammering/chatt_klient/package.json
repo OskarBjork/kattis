@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "chatt_klient",
   "version": "1.0.0",
   "description": "lol program för chatt",
