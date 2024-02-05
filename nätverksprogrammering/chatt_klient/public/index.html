@@ -5,16 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/socketIOSaker.js" defer></script>
+    <style>
+      .bottom {
+        position: fixed;
+        bottom: 0;
+        width: 50rem;
+      }
+      .inputField {
+        width: 90%;
+        height: 2rem;
+      }
+      .hidden {
+        display: none;
+      }
+      .messages {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .message {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+      }
+    </style>
     <title></title>
   </head>
   <body>
+    <div id="error-container"></div>
     <p id="current-username"></p>
     <div id="username">
       <input type="text" name="" id="user" />
       <button onclick="setUserName()">Send</button>
     </div>
-    <div id="error-container"></div>
-    <input type="text" class="inputField" />
-    <button class="sendBtn" onclick="message()">Send</button>
+    <div id="messages" class="messages"></div>
+    <div class="bottom hidden" id="message-input">
+      <input type="text" class="inputField" />
+      <button class="sendBtn" onclick="message()">Send</button>
+    </div>
   </body>
 </html>

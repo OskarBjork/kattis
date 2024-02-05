@@ -8,9 +8,21 @@ const message = function () {
 let userName = "";
 var socket = io();
 socket.on("message", function (msgData) {
-  var p = document.createElement("p");
-  p.textContent = `${msgData.userName}: ${msgData.msg}`;
-  document.body.appendChild(p);
+  var element;
+  if (msgData.msg.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+    element = document.createElement("img");
+    element.src = msgData.msg;
+    element.classList.add("message");
+    element.alt = `${msgData.userName}'s image`;
+    let p = document.createElement("p");
+    p.textContent = msgData.userName + ": ";
+    document.getElementById("messages").appendChild(p);
+  } else {
+    element = document.createElement("p");
+    element.classList.add("message");
+    element.textContent = `${msgData.userName}: ${msgData.msg}`;
+  }
+  document.getElementById("messages").appendChild(element);
 });
 
 socket.on("userExists", function (data) {
@@ -21,7 +33,7 @@ socket.on("userExists", function (data) {
 socket.on("userSet", function (data) {
   document.getElementById("current-username").innerText =
     "Your username is: " + data.userName;
-
+  document.getElementById("message-input").classList.remove("hidden");
   userName = data.userName;
 });
 
