@@ -33,6 +33,7 @@ io.on("connection", (socket) => {
       users.push(userName);
       socket.userName = userName;
       socket.emit("userSet", { userName });
+      console.log("hello");
     }
   });
 });

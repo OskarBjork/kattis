@@ -23,6 +23,7 @@ socket.on("message", function (msgData) {
     element.textContent = `${msgData.userName}: ${msgData.msg}`;
   }
   document.getElementById("messages").appendChild(element);
+  document.getElementById("message-input").value = "";
 });
 
 socket.on("userExists", function (data) {
@@ -31,8 +32,10 @@ socket.on("userExists", function (data) {
 });
 
 socket.on("userSet", function (data) {
+  // console.log("hello");
   document.getElementById("current-username").innerText =
     "Your username is: " + data.userName;
+  console.log("hello");
   document.getElementById("message-input").classList.remove("hidden");
   userName = data.userName;
 });

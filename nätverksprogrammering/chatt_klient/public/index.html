@@ -34,14 +34,18 @@
   <body>
     <div id="error-container"></div>
     <p id="current-username"></p>
-    <div id="username">
+    <form id="username" onsubmit="event.preventDefault(); setUserName();">
       <input type="text" name="" id="user" />
-      <button onclick="setUserName()">Send</button>
-    </div>
+      <button type="submit">Set Username</button>
+    </form>
     <div id="messages" class="messages"></div>
-    <div class="bottom hidden" id="message-input">
-      <input type="text" class="inputField" />
-      <button class="sendBtn" onclick="message()">Send</button>
-    </div>
+    <form
+      class="bottom hidden"
+      id="message-input"
+      onsubmit="event.preventDefault(); message();"
+    >
+      <input type="text" class="inputField" style="align-items: end" />
+      <button type="submit" class="sendBtn">Send</button>
+    </form>
   </body>
 </html>
