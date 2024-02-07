@@ -36,6 +36,10 @@ io.on("connection", (socket) => {
       console.log("hello");
     }
   });
+
+  socket.on("typing", (data) => {
+    socket.broadcast.emit("user-is-typing", data);
+  });
 });
 
 server.listen(3000, () => {

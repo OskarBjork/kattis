@@ -39,13 +39,18 @@
       <button type="submit">Set Username</button>
     </form>
     <div id="messages" class="messages"></div>
-    <form
-      class="bottom hidden"
-      id="message-input"
-      onsubmit="event.preventDefault(); message();"
-    >
-      <input type="text" class="inputField" style="align-items: end" />
-      <button type="submit" class="sendBtn">Send</button>
-    </form>
+    <div class="bottom">
+      <div id="user-typing">
+        <p id="user-typing-text"></p>
+      </div>
+      <form
+        class="hidden"
+        id="message-input"
+        onsubmit="event.preventDefault(); message();"
+      >
+        <input type="text" class="inputField" />
+        <button type="submit" class="sendBtn">Send</button>
+      </form>
+    </div>
   </body>
 </html>

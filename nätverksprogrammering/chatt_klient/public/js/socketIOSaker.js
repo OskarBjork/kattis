@@ -1,12 +1,24 @@
+var socket = io();
+let userName = "";
+var eventEmitter = io();
+let currentTypingUser = "";
+let currentTypingTimeout = null;
+
+let typingTimeout;
+
 const message = function () {
-  var eventEmitter = io();
   const input = document.querySelector(".inputField");
   let msg = input.value;
+  input.value = "";
   eventEmitter.emit("message", { userName: userName, msg: msg });
 };
 
-let userName = "";
-var socket = io();
+document
+  .getElementById("message-input")
+  .addEventListener("keypress", function (e) {
+    socket.emit("typing", userName);
+  });
+
 socket.on("message", function (msgData) {
   var element;
   if (msgData.msg.match(/\.(jpeg|jpg|gif|png)$/) != null) {
@@ -23,7 +35,6 @@ socket.on("message", function (msgData) {
     element.textContent = `${msgData.userName}: ${msgData.msg}`;
   }
   document.getElementById("messages").appendChild(element);
-  document.getElementById("message-input").value = "";
 });
 
 socket.on("userExists", function (data) {
@@ -32,12 +43,19 @@ socket.on("userExists", function (data) {
 });
 
 socket.on("userSet", function (data) {
-  // console.log("hello");
   document.getElementById("current-username").innerText =
     "Your username is: " + data.userName;
-  console.log("hello");
   document.getElementById("message-input").classList.remove("hidden");
   userName = data.userName;
+});
+
+socket.on("user-is-typing", function (data) {
+  document.getElementById("user-typing-text").innerText =
+    data + " is typing...";
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(function () {
+    document.getElementById("user-typing-text").innerText = "";
+  }, 2000);
 });
 
 function setUserName() {
