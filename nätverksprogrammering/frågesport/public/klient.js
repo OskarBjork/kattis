@@ -18,10 +18,17 @@ const answer = (event) => {
   answerInput.value = "";
 };
 
+console.log("Klient.js");
+
 // Socket events
 
 socket.on("question", (data) => {
   questionParagraph.textContent = data;
+});
+
+socket.on("answerResponse", (data) => {
+  console.log("Answer response received:", data);
+  document.getElementById("question-response").textContent = data;
 });
 
 // Main

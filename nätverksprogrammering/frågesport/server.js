@@ -50,6 +50,12 @@ io.on("connection", (socket) => {
 
   socket.on("answer", (data) => {
     console.log("Answer received:", data);
+    if (data.toLowerCase() === currentQuestionAnswer.toLowerCase()) {
+      socket.emit("answerResponse", "Correct!");
+      console.log("Correct answer!");
+    } else {
+      socket.emit("answerResponse", "Wrong!");
+    }
   });
 });
 
